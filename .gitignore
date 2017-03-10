@@ -176,3 +176,8 @@ zeromq-*.zip
 core
 build
 test-suite.log
+/buck-out/
+/.buckd/
+/buckaroo/
+.buckconfig.local
+BUCKAROO_DEPS
