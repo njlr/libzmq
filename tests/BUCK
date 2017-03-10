@@ -1,0 +1,25 @@
+cxx_binary(
+  name = 'test-base85',
+  srcs = [
+    'test_base85.cpp'
+  ],
+  compiler_flags = [
+    '-DZMQ_CUSTOM_PLATFORM_HPP',
+  ],
+  deps = [
+    '//:libzmq',
+  ],
+)
+
+cxx_binary(
+  name = 'test-atomics',
+  srcs = [
+    'test_atomics.cpp'
+  ],
+  compiler_flags = [
+    '-DZMQ_CUSTOM_PLATFORM_HPP',
+  ],
+  deps = [
+    '//:libzmq',
+  ],
+)

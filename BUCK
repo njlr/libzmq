@@ -1,3 +1,5 @@
+include_defs('//BUCKAROO_DEPS')
+
 MACOS_PLATFORM_HPP = """
 #ifndef __ZMQ_PLATFORM_HPP_INCLUDED__
 #define __ZMQ_PLATFORM_HPP_INCLUDED__
@@ -35,7 +37,9 @@ MACOS_PLATFORM_HPP = """
 /* #undef ZMQ_MAKE_VALGRIND_HAPPY */
 
 #define ZMQ_HAVE_CURVE
-#define ZMQ_USE_TWEETNACL
+/* #define ZMQ_USE_TWEETNACL */
+#define ZMQ_USE_LIBSODIUM
+#define HAVE_LIBSODIUM
 /* #undef HAVE_LIBSODIUM */
 
 #ifdef _AIX
@@ -107,17 +111,18 @@ cxx_library(
   exported_headers = subdir_glob([
     ('include', '*.h'),
   ]),
-  headers = subdir_glob([
-    ('src', '*.hpp'),
-  ]),
-  platform_headers = [
+  exported_platform_headers = [
     ('default', { 'platform.hpp': ':macos-platform.hpp' }),
     ('^macos.*', { 'platform.hpp': ':macos-platform.hpp' }),
   ],
+  headers = subdir_glob([
+    ('src', '*.hpp'),
+  ]),
   srcs = glob([
     'src/*.cpp',
   ]),
   visibility = [
     'PUBLIC',
   ],
+  deps = BUCKAROO_DEPS,
 )
